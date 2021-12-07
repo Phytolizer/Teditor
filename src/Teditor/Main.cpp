@@ -36,7 +36,7 @@ int main()
 		renderer.setDrawColor(SDL_Color{25, 25, 25, 255});
 		renderer.clear();
 		uint8_t* myText = rope_create_cstr(myRope);
-		font.draw(0, 0, reinterpret_cast<const char*>(myText));
+		font.draw(100, 250, reinterpret_cast<const char*>(myText));
 		free(myText);
 		renderer.present();
 	}
