@@ -1,4 +1,5 @@
 #include "SdlWrap/Renderer.hpp"
+#include "SdlWrap/FcFont.hpp"
 #include <sstream>
 
 sdl::Renderer::Renderer(SDL_Renderer* handle) : m_handle{handle}
@@ -52,4 +53,15 @@ void sdl::Renderer::setDrawColor(SDL_Color color)
 		message << "SDL_SetRenderDrawColor: " << SDL_GetError();
 		throw std::runtime_error{message.str()};
 	}
+}
+sdl::FcFont sdl::Renderer::loadFont(const std::string& path, int pointSize, SDL_Color color, int style)
+{
+	FC_Font* handle = FC_CreateFont();
+	if (FC_LoadFont(handle, m_handle, path.c_str(), pointSize, color, style) == 0)
+	{
+		std::ostringstream message;
+		message << "FC_LoadFont reported failure";
+		throw std::runtime_error{message.str()};
+	}
+	return FcFont{handle, m_handle};
 }

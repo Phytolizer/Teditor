@@ -9,21 +9,23 @@ project(
 
 find_package("SDL2" REQUIRED)
 
+add_subdirectory("3rd/SDL_FontCache")
+
 add_library(
-	"SdlWrap"
-	"inc/SdlWrap/GraphicsContext.hpp"
-	"inc/SdlWrap/Renderer.hpp"
-	"inc/SdlWrap/TtfContext.hpp"
-	"inc/SdlWrap/TtfFont.hpp"
-	"inc/SdlWrap/Window.hpp"
-	"src/SdlWrap/GraphicsContext.cpp"
-	"src/SdlWrap/Renderer.cpp"
-	"src/SdlWrap/TtfContext.cpp"
-	"src/SdlWrap/TtfFont.cpp"
-	"src/SdlWrap/Window.cpp"
-)
+		"SdlWrap"
+		"inc/SdlWrap/GraphicsContext.hpp"
+		"inc/SdlWrap/Renderer.hpp"
+		"inc/SdlWrap/TtfContext.hpp"
+		"inc/SdlWrap/TtfFont.hpp"
+		"inc/SdlWrap/Window.hpp"
+		"src/SdlWrap/GraphicsContext.cpp"
+		"src/SdlWrap/Renderer.cpp"
+		"src/SdlWrap/TtfContext.cpp"
+		"src/SdlWrap/TtfFont.cpp"
+		"src/SdlWrap/Window.cpp"
+		inc/SdlWrap/FcFont.hpp src/SdlWrap/FcFont.cpp)
 target_include_directories("SdlWrap" PUBLIC "inc")
-target_link_libraries("SdlWrap" PUBLIC "SDL2" "SDL2_ttf")
+target_link_libraries("SdlWrap" PUBLIC "SDL2" "SDL2_ttf" "SDL_FontCache")
 
 add_custom_target(
 		"copy_assets"

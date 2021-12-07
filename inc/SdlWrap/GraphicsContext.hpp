@@ -21,7 +21,7 @@ class GraphicsContext
 	GraphicsContext(GraphicsContext&& other) noexcept;
 	GraphicsContext& operator=(GraphicsContext&& other) noexcept;
 
-	TtfContext initTtf() const;
+	[[nodiscard]] TtfContext initTtf() const;
 
 	Window createWindow(const char* title, int width, int height, Uint32 flags);
 };
