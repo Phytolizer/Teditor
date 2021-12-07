@@ -10,6 +10,7 @@ project(
 find_package("SDL2" REQUIRED)
 
 add_subdirectory("3rd/SDL_FontCache")
+add_subdirectory("3rd/librope")
 
 add_library(
 	"SdlWrap"
@@ -43,5 +44,5 @@ add_custom_target(
 
 add_executable("Teditor" "src/Teditor/Main.cpp")
 target_compile_features("Teditor" PRIVATE "cxx_std_20")
-target_link_libraries("Teditor" PRIVATE "SdlWrap")
+target_link_libraries("Teditor" PRIVATE "SdlWrap" "librope")
 add_dependencies("Teditor" "copy_assets")
