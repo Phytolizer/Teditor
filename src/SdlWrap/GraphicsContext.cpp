@@ -14,7 +14,7 @@ void sdl::GraphicsContext::cleanup() const
 	}
 }
 
-sdl::GraphicsContext::GraphicsContext(Uint32 flags) : m_isMain{true}, m_ttfWasInit{false}
+sdl::GraphicsContext::GraphicsContext(Uint32 flags) : m_isMain{true}
 {
 	if (SDL_Init(flags) != 0)
 	{
