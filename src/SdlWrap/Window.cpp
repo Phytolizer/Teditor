@@ -19,7 +19,7 @@ sdl::Renderer sdl::Window::createRenderer(int index, Uint32 flags)
 	if (handle == nullptr)
 	{
 		std::ostringstream message;
-		message << "SDL renderer creation failed: " << SDL_GetError();
+		message << "SDL_CreateRenderer: " << SDL_GetError();
 		throw std::runtime_error{message.str()};
 	}
 	return Renderer{handle};

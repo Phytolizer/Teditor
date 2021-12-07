@@ -14,7 +14,12 @@ void sdl::GraphicsContext::cleanup() const
 
 sdl::GraphicsContext::GraphicsContext(Uint32 flags) : m_isMain{true}
 {
-	SDL_Init(flags);
+	if (SDL_Init(flags) != 0)
+	{
+		std::ostringstream message;
+		message << "SDL_Init: " << SDL_GetError();
+		throw std::runtime_error{message.str()};
+	}
 }
 
 sdl::GraphicsContext::~GraphicsContext()
@@ -46,7 +51,7 @@ sdl::Window sdl::GraphicsContext::createWindow(const char* title, int width, int
 	if (handle == nullptr)
 	{
 		std::ostringstream message;
-		message << "SDL window creation failed: " << SDL_GetError();
+		message << "SDL_CreateWindow: " << SDL_GetError();
 		throw std::runtime_error{message.str()};
 	}
 	return sdl::Window{handle};
