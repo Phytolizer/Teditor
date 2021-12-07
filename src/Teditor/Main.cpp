@@ -25,6 +25,7 @@ int main()
 			}
 		}
 
+		renderer.setDrawColor(SDL_Color{100, 0, 0, 255});
 		renderer.clear();
 		renderer.present();
 	}

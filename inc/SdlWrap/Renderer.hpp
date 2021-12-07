@@ -21,5 +21,6 @@ class Renderer
 
 	void clear();
 	void present();
+	void setDrawColor(SDL_Color color);
 };
 } // namespace sdl

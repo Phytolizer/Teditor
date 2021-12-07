@@ -44,3 +44,12 @@ void sdl::Renderer::present()
 {
 	SDL_RenderPresent(m_handle);
 }
+void sdl::Renderer::setDrawColor(SDL_Color color)
+{
+	if (SDL_SetRenderDrawColor(m_handle, color.r, color.g, color.b, color.a) != 0)
+	{
+		std::ostringstream message;
+		message << "SDL_SetRenderDrawColor: " << SDL_GetError();
+		throw std::runtime_error{message.str()};
+	}
+}
