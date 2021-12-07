@@ -4,6 +4,7 @@
 #include <SdlWrap/TtfContext.hpp>
 #include <SdlWrap/TtfFont.hpp>
 #include <SdlWrap/Window.hpp>
+#include <rope.h>
 
 int main()
 {
@@ -12,6 +13,10 @@ int main()
 	sdl::Window window = context.createWindow("Teditor", 800, 600, SDL_WINDOW_RESIZABLE);
 	sdl::Renderer renderer = window.createRenderer(-1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	sdl::FcFont font = renderer.loadFont("res/fonts/Hack.ttf", 16, {0, 0, 0, 255}, TTF_STYLE_NORMAL);
+
+	rope* myRope = rope_new();
+	rope_insert(myRope, 0, reinterpret_cast<const uint8_t*>("Hello, world!"));
+	rope_insert(myRope, sizeof("Hello,"), reinterpret_cast<const uint8_t*>("ropy "));
 
 	bool run = true;
 	while (run)
@@ -31,8 +36,12 @@ int main()
 
 		renderer.setDrawColor(SDL_Color{100, 0, 0, 255});
 		renderer.clear();
-		font.draw(0, 0, "Hello World!");
+		auto* myText = rope_create_cstr(myRope);
+		font.draw(0, 0, reinterpret_cast<const char*>(myText));
+		free(myText);
 		renderer.present();
 	}
+
+	rope_free(myRope);
 	return 0;
 }
