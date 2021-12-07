@@ -1,6 +1,10 @@
-cmake_minimum_required(VERSION 3.21)
-project(Teditor)
+cmake_minimum_required(VERSION 3.12...3.22)
+project(
+	"Teditor"
+	LANGUAGES "CXX"
+	VERSION "0.1.0"
+	DESCRIPTION "Text Editor"
+	HOMEPAGE_URL "https://github.com/Phytolizer/Teditor"
+)
 
-set(CMAKE_CXX_STANDARD 20)
-
-add_executable(Teditor main.cpp)
+add_executable("Teditor" "main.cpp")
