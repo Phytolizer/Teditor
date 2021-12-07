@@ -9,7 +9,6 @@
 int main()
 {
 	sdl::GraphicsContext context{SDL_INIT_VIDEO};
-	sdl::TtfContext ttf = context.initTtf();
 	sdl::Window window = context.createWindow("Teditor", 800, 600, SDL_WINDOW_RESIZABLE);
 	sdl::Renderer renderer = window.createRenderer(-1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	sdl::FcFont font = renderer.loadFont("res/fonts/Hack.ttf", 16, {255, 255, 255, 255}, TTF_STYLE_NORMAL);
