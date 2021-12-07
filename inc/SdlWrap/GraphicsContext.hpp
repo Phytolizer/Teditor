@@ -5,6 +5,7 @@
 namespace sdl
 {
 class Window;
+class TtfContext;
 
 class GraphicsContext
 {
@@ -19,6 +20,8 @@ class GraphicsContext
 	GraphicsContext& operator=(const GraphicsContext&) = delete;
 	GraphicsContext(GraphicsContext&& other) noexcept;
 	GraphicsContext& operator=(GraphicsContext&& other) noexcept;
+
+	TtfContext initTtf() const;
 
 	Window createWindow(const char* title, int width, int height, Uint32 flags);
 };

@@ -1,6 +1,8 @@
 #include "SdlWrap/GraphicsContext.hpp"
+#include "SdlWrap/TtfContext.hpp"
 #include "SdlWrap/Window.hpp"
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include <sstream>
 #include <stdexcept>
 
@@ -12,7 +14,7 @@ void sdl::GraphicsContext::cleanup() const
 	}
 }
 
-sdl::GraphicsContext::GraphicsContext(Uint32 flags) : m_isMain{true}
+sdl::GraphicsContext::GraphicsContext(Uint32 flags) : m_isMain{true}, m_ttfWasInit{false}
 {
 	if (SDL_Init(flags) != 0)
 	{
@@ -47,7 +49,7 @@ sdl::GraphicsContext& sdl::GraphicsContext::operator=(sdl::GraphicsContext&& oth
 sdl::Window sdl::GraphicsContext::createWindow(const char* title, int width, int height, Uint32 flags)
 {
 	SDL_Window* handle =
-	        SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
+	    SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
 	if (handle == nullptr)
 	{
 		std::ostringstream message;
@@ -55,4 +57,10 @@ sdl::Window sdl::GraphicsContext::createWindow(const char* title, int width, int
 		throw std::runtime_error{message.str()};
 	}
 	return sdl::Window{handle};
+}
+
+// NOLINTNEXTLINE(readability-convert-member-functions-to-static)
+sdl::TtfContext sdl::GraphicsContext::initTtf() const
+{
+	return TtfContext{};
 }

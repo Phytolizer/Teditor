@@ -1,11 +1,15 @@
 #include <SDL2/SDL.h>
 #include <SdlWrap/GraphicsContext.hpp>
 #include <SdlWrap/Renderer.hpp>
+#include <SdlWrap/TtfContext.hpp>
+#include <SdlWrap/TtfFont.hpp>
 #include <SdlWrap/Window.hpp>
 
 int main()
 {
 	sdl::GraphicsContext context{SDL_INIT_VIDEO};
+	sdl::TtfContext ttf = context.initTtf();
+	sdl::TtfFont font = ttf.openFont("res/fonts/Hack.ttf", 20);
 	sdl::Window window = context.createWindow("Teditor", 800, 600, SDL_WINDOW_RESIZABLE);
 	sdl::Renderer renderer = window.createRenderer(-1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
