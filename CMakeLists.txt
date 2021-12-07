@@ -42,7 +42,12 @@ add_custom_target(
 			"${CMAKE_CURRENT_SOURCE_DIR}/res" "${CMAKE_CURRENT_BINARY_DIR}/res"
 )
 
-add_executable("Teditor" "src/Teditor/Main.cpp")
+add_executable(
+	"Teditor"
+	"src/Teditor/Main.cpp"
+	"src/Teditor/Teditor.cpp"
+	"src/Teditor/Teditor.hpp"
+)
 target_compile_features("Teditor" PRIVATE "cxx_std_20")
 target_link_libraries("Teditor" PRIVATE "SdlWrap" "librope")
 add_dependencies("Teditor" "copy_assets")
