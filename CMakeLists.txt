@@ -12,25 +12,33 @@ find_package("SDL2" REQUIRED)
 add_subdirectory("3rd/SDL_FontCache")
 
 add_library(
-		"SdlWrap"
-		"inc/SdlWrap/GraphicsContext.hpp"
-		"inc/SdlWrap/Renderer.hpp"
-		"inc/SdlWrap/TtfContext.hpp"
-		"inc/SdlWrap/TtfFont.hpp"
-		"inc/SdlWrap/Window.hpp"
-		"src/SdlWrap/GraphicsContext.cpp"
-		"src/SdlWrap/Renderer.cpp"
-		"src/SdlWrap/TtfContext.cpp"
-		"src/SdlWrap/TtfFont.cpp"
-		"src/SdlWrap/Window.cpp"
-		inc/SdlWrap/FcFont.hpp src/SdlWrap/FcFont.cpp)
+	"SdlWrap"
+	"inc/SdlWrap/FcFont.hpp"
+	"inc/SdlWrap/GraphicsContext.hpp"
+	"inc/SdlWrap/Renderer.hpp"
+	"inc/SdlWrap/TtfContext.hpp"
+	"inc/SdlWrap/TtfFont.hpp"
+	"inc/SdlWrap/Window.hpp"
+	"src/SdlWrap/FcFont.cpp"
+	"src/SdlWrap/GraphicsContext.cpp"
+	"src/SdlWrap/Renderer.cpp"
+	"src/SdlWrap/TtfContext.cpp"
+	"src/SdlWrap/TtfFont.cpp"
+	"src/SdlWrap/Window.cpp"
+)
 target_include_directories("SdlWrap" PUBLIC "inc")
-target_link_libraries("SdlWrap" PUBLIC "SDL2" "SDL2_ttf" "SDL_FontCache")
+target_link_libraries(
+	"SdlWrap"
+	PUBLIC "SDL2"
+		   "SDL2_ttf"
+		   "SDL_FontCache"
+)
 
 add_custom_target(
-		"copy_assets"
-		DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/res"
-		COMMAND  "${CMAKE_COMMAND}" -E copy_directory "${CMAKE_CURRENT_SOURCE_DIR}/res" "${CMAKE_CURRENT_BINARY_DIR}/res"
+	"copy_assets"
+	DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/res"
+	COMMAND "${CMAKE_COMMAND}" -E copy_directory
+			"${CMAKE_CURRENT_SOURCE_DIR}/res" "${CMAKE_CURRENT_BINARY_DIR}/res"
 )
 
 add_executable("Teditor" "src/Teditor/Main.cpp")
