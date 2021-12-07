@@ -22,6 +22,6 @@ class FcFont
 	FcFont(FcFont&& other) noexcept;
 	FcFont& operator=(FcFont&& other) noexcept;
 
-	void draw(float x, float y, const std::string& text);
+	void draw(float x, float y, const std::string& text) const;
 };
 } // namespace sdl

@@ -34,7 +34,7 @@ sdl::FcFont& sdl::FcFont::operator=(sdl::FcFont&& other) noexcept
 	return *this;
 }
 
-void sdl::FcFont::draw(float x, float y, const std::string& text)
+void sdl::FcFont::draw(float x, float y, const std::string& text) const
 {
 	FC_Draw(m_handle, m_renderer, x, y, text.c_str());
 }

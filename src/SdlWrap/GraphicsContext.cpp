@@ -2,7 +2,6 @@
 #include "SdlWrap/TtfContext.hpp"
 #include "SdlWrap/Window.hpp"
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
 #include <sstream>
 #include <stdexcept>
 
