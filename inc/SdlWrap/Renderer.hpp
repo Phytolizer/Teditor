@@ -18,5 +18,8 @@ class Renderer
 	Renderer& operator=(const Renderer&) = delete;
 	Renderer(Renderer&& other) noexcept;
 	Renderer& operator=(Renderer&& other) noexcept;
+
+	void clear();
+	void present();
 };
 } // namespace sdl
