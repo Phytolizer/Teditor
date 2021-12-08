@@ -46,3 +46,12 @@ void Teditor::writeText(const char* string)
 	rope_insert(m_rope, m_pos, reinterpret_cast<const uint8_t*>(string));
 	m_pos += strlen(string);
 }
+
+void Teditor::backspace()
+{
+	if (m_pos > 0)
+	{
+		--m_pos;
+		rope_del(m_rope, m_pos, 1);
+	}
+}

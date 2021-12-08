@@ -27,6 +27,16 @@ int main()
 			case SDL_QUIT:
 				run = false;
 				break;
+			case SDL_KEYDOWN:
+				switch (event.key.keysym.sym)
+				{
+				case SDLK_BACKSPACE:
+					teditor.backspace();
+					break;
+				default:
+					break;
+				}
+				break;
 			case SDL_TEXTINPUT:
 				teditor.writeText(event.text.text);
 				break;

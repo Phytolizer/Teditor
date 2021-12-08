@@ -20,4 +20,5 @@ class Teditor
 
 	void renderText(const sdl::FcFont& font) const;
 	void writeText(const char* string);
+	void backspace();
 };
