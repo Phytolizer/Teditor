@@ -6,6 +6,7 @@
 class Teditor
 {
 	rope* m_rope;
+	size_t m_pos;
 
 	void cleanup() const;
 
@@ -18,4 +19,5 @@ class Teditor
 	Teditor& operator=(Teditor&& other) noexcept;
 
 	void renderText(const sdl::FcFont& font) const;
+	void writeText(const char* string);
 };

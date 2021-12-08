@@ -1,10 +1,11 @@
+#include "Teditor.hpp"
 #include <SDL2/SDL.h>
 #include <SdlWrap/GraphicsContext.hpp>
 #include <SdlWrap/Renderer.hpp>
 #include <SdlWrap/TtfContext.hpp>
 #include <SdlWrap/TtfFont.hpp>
 #include <SdlWrap/Window.hpp>
-#include <rope.h>
+#include <iostream>
 
 int main()
 {
@@ -13,9 +14,7 @@ int main()
 	sdl::Renderer renderer = window.createRenderer(-1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	sdl::FcFont font = renderer.loadFont("res/fonts/Hack.ttf", 16, {255, 255, 255, 255}, TTF_STYLE_NORMAL);
 
-	rope* myRope = rope_new();
-	rope_insert(myRope, 0, reinterpret_cast<const uint8_t*>("Hello, world!"));
-	rope_insert(myRope, sizeof("Hello,"), reinterpret_cast<const uint8_t*>("ropy "));
+	Teditor teditor;
 
 	bool run = true;
 	while (run)
@@ -28,6 +27,9 @@ int main()
 			case SDL_QUIT:
 				run = false;
 				break;
+			case SDL_TEXTINPUT:
+				teditor.writeText(event.text.text);
+				break;
 			default:
 				break;
 			}
@@ -35,12 +37,9 @@ int main()
 
 		renderer.setDrawColor(SDL_Color{25, 25, 25, 255});
 		renderer.clear();
-		uint8_t* myText = rope_create_cstr(myRope);
-		font.draw(100, 250, reinterpret_cast<const char*>(myText));
-		free(myText);
+		teditor.renderText(font);
 		renderer.present();
 	}
 
-	rope_free(myRope);
 	return 0;
 }
