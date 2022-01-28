@@ -7,7 +7,7 @@
 #include <SdlWrap/Window.hpp>
 #include <iostream>
 
-int main()
+int main(int argc, char** argv)
 {
 	sdl::GraphicsContext context{SDL_INIT_VIDEO};
 	sdl::Window window = context.createWindow("Teditor", 800, 600, SDL_WINDOW_RESIZABLE);

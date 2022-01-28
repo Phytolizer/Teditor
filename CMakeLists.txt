@@ -7,7 +7,8 @@ project(
 	HOMEPAGE_URL "https://github.com/Phytolizer/Teditor"
 )
 
-find_package("SDL2" REQUIRED)
+find_package("sdl2" CONFIG REQUIRED)
+find_package("sdl2-ttf" CONFIG REQUIRED)
 
 add_subdirectory("3rd/SDL_FontCache")
 add_subdirectory("3rd/librope")
@@ -30,8 +31,8 @@ add_library(
 target_include_directories("SdlWrap" PUBLIC "inc")
 target_link_libraries(
 	"SdlWrap"
-	PUBLIC "SDL2"
-		   "SDL2_ttf"
+	PUBLIC "SDL2::SDL2"
+		   "SDL2::SDL2_ttf"
 		   "SDL_FontCache"
 )
 
@@ -49,5 +50,5 @@ add_executable(
 	"src/Teditor/Teditor.hpp"
 )
 target_compile_features("Teditor" PRIVATE "cxx_std_20")
-target_link_libraries("Teditor" PRIVATE "SdlWrap" "librope")
+target_link_libraries("Teditor" PRIVATE "SDL2::SDL2main" "SdlWrap" "librope")
 add_dependencies("Teditor" "copy_assets")
