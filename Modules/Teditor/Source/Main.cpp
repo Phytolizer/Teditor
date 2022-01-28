@@ -17,5 +17,26 @@ int main(int argc, char** argv)
                            SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_SHOWN);
     const SdlWrapper::Renderer renderer =
         window.CreateRenderer(-1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+
+    bool quit = false;
+    while (!quit)
+    {
+        SDL_Event e;
+        while (ctx.PollEvent(&e))
+        {
+            switch (e.type)
+            {
+                case SDL_QUIT:
+                    quit = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        renderer.SetDrawColor({0xFF, 0x00, 0x00, 0xFF});
+        renderer.Clear();
+        renderer.Present();
+    }
     return 0;
 }

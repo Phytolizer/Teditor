@@ -42,6 +42,12 @@ SdlWrapper::Context& SdlWrapper::Context::operator=(Context&& other) noexcept
     return *this;
 }
 
+bool SdlWrapper::Context::PollEvent(SDL_Event* event) const
+{
+    (void)this;
+    return SDL_PollEvent(event);
+}
+
 SdlWrapper::VideoContext SdlWrapper::Context::Video() const
 {
     return VideoContext{this};

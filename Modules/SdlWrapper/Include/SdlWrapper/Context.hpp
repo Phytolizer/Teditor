@@ -1,4 +1,5 @@
 #pragma once
+#include <SDL_events.h>
 
 namespace SdlWrapper
 {
@@ -21,6 +22,7 @@ class Context
     Context(Context&& other) noexcept;
     Context& operator=(Context&& other) noexcept;
 
+    bool PollEvent(SDL_Event* event) const;
     [[nodiscard]] VideoContext Video() const;
 };
 

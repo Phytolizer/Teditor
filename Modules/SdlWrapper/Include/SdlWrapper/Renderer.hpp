@@ -20,6 +20,10 @@ class Renderer
     Renderer& operator=(const Renderer&) = delete;
     Renderer(Renderer&& other) noexcept;
     Renderer& operator=(Renderer&& other) noexcept;
+
+    void SetDrawColor(SDL_Color color) const;
+    void Clear() const;
+    void Present() const;
 };
 
 } // namespace SdlWrapper

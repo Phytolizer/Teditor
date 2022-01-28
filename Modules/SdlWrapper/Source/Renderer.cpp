@@ -38,3 +38,21 @@ SdlWrapper::Renderer& SdlWrapper::Renderer::operator=(Renderer&& other) noexcept
 
     return *this;
 }
+
+void SdlWrapper::Renderer::SetDrawColor(const SDL_Color color) const
+{
+    SDL_SetRenderDrawColor(_handle, color.r, color.g, color.b, color.a);
+}
+
+void SdlWrapper::Renderer::Clear() const
+{
+    if (const int code = SDL_RenderClear(_handle); code != 0)
+    {
+        throw Error::FailureCode("SDL_RenderClear", code);
+    }
+}
+
+void SdlWrapper::Renderer::Present() const
+{
+    SDL_RenderPresent(_handle);
+}
