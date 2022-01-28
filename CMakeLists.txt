@@ -15,6 +15,8 @@ include(DeclareModule)
 
 find_package(sdl2 CONFIG REQUIRED)
 
+add_subdirectory("ThirdParty/SDL_FontCache")
+
 declare_module(
     "SdlWrapper"
     KIND library
