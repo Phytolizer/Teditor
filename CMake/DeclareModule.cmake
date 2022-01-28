@@ -52,9 +52,4 @@ function(declare_module NAME)
             ${DM_TARGET_NAME} PROPERTIES OUTPUT_NAME ${DM_OUTPUT_NAME}
         )
     endif()
-    if(WIN32)
-        target_compile_definitions(
-            ${DM_TARGET_NAME} ${DM_PUBLICITY} _CRT_SECURE_NO_WARNINGS
-        )
-    endif()
 endfunction()
