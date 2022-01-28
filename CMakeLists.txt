@@ -20,6 +20,7 @@ declare_module(
     KIND library
     SOURCES "Context.cpp"
             "Error.cpp"
+            "Renderer.cpp"
             "VideoContext.cpp"
             "Window.cpp"
     DEPENDS SDL2::SDL2

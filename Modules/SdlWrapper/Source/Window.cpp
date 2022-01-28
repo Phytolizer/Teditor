@@ -1,6 +1,7 @@
 #include "SdlWrapper/Window.hpp"
 
 #include "SdlWrapper/Error.hpp"
+#include "SdlWrapper/Renderer.hpp"
 
 SdlWrapper::Window::Window(const VideoContext* ctx,
                            const std::string& title,
@@ -43,4 +44,9 @@ SdlWrapper::Window& SdlWrapper::Window::operator=(Window&& other) noexcept
     }
 
     return *this;
+}
+
+SdlWrapper::Renderer SdlWrapper::Window::CreateRenderer(const int index, const std::uint32_t flags) const
+{
+    return Renderer{_handle, index, flags};
 }

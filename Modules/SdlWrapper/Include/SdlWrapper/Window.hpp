@@ -8,6 +8,8 @@
 namespace SdlWrapper
 {
 
+class Renderer;
+
 class Window
 {
     SDL_Window* _handle;
@@ -22,6 +24,8 @@ class Window
     Window& operator=(const Window&) = delete;
     Window(Window&& other) noexcept;
     Window& operator=(Window&& other) noexcept;
+
+    [[nodiscard]] Renderer CreateRenderer(int index, std::uint32_t flags) const;
 };
 
 } // namespace SdlWrapper
