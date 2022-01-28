@@ -41,7 +41,10 @@ SdlWrapper::Renderer& SdlWrapper::Renderer::operator=(Renderer&& other) noexcept
 
 void SdlWrapper::Renderer::SetDrawColor(const SDL_Color color) const
 {
-    SDL_SetRenderDrawColor(_handle, color.r, color.g, color.b, color.a);
+    if (const int code = SDL_SetRenderDrawColor(_handle, color.r, color.g, color.b, color.a); code != 0)
+    {
+        throw Error::FailureCode("SDL_SetRenderDrawColor", code);
+    }
 }
 
 void SdlWrapper::Renderer::Clear() const
