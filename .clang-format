@@ -2,4 +2,6 @@
 BasedOnStyle: Microsoft
 PointerAlignment: Left
 TabWidth: 4
+BinPackArguments: false
+BinPackParameters: false
 UseTab: Never
