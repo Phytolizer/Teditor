@@ -21,6 +21,8 @@ class Renderer
     Renderer(Renderer&& other) noexcept;
     Renderer& operator=(Renderer&& other) noexcept;
 
+    [[nodiscard]] SDL_Renderer* Get() const;
+
     void SetDrawColor(SDL_Color color) const;
     void Clear() const;
     void Present() const;

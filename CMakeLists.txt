@@ -22,10 +22,11 @@ declare_module(
     KIND library
     SOURCES "Context.cpp"
             "Error.cpp"
+            "FontCache/Font.cpp"
             "Renderer.cpp"
             "VideoContext.cpp"
             "Window.cpp"
-    DEPENDS SDL2::SDL2
+    DEPENDS SDL2::SDL2 FontCache
 )
 declare_module(
     "Teditor"

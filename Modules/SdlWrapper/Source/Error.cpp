@@ -5,7 +5,7 @@
 SdlWrapper::Error::Error(const std::string_view function, const int code) noexcept : runtime_error{"dummy message"}
 {
     std::ostringstream messageStream;
-    messageStream << function << " returned non-zero code " << code;
+    messageStream << function << " returned failure code " << code;
     _message = messageStream.str();
 }
 

@@ -39,6 +39,11 @@ SdlWrapper::Renderer& SdlWrapper::Renderer::operator=(Renderer&& other) noexcept
     return *this;
 }
 
+SDL_Renderer* SdlWrapper::Renderer::Get() const
+{
+    return _handle;
+}
+
 void SdlWrapper::Renderer::SetDrawColor(const SDL_Color color) const
 {
     if (const int code = SDL_SetRenderDrawColor(_handle, color.r, color.g, color.b, color.a); code != 0)
