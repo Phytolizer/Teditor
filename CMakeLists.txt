@@ -10,6 +10,8 @@ project(
 
 set(CMAKE_CXX_STANDARD 20)
 
+configure_file("Config.hpp.cin" "${PROJECT_BINARY_DIR}/Include/Config.hpp")
+
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMake")
 include(DeclareModule)
 
@@ -33,4 +35,5 @@ declare_module(
     KIND executable
     SOURCES "Main.cpp"
     DEPENDS SDL2::SDL2 SDL2::SDL2main "SdlWrapper"
+    INCLUDES "${PROJECT_BINARY_DIR}/Include"
 )

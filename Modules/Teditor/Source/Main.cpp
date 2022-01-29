@@ -1,3 +1,4 @@
+#include <Config.hpp>
 #include <SDL2/SDL.h>
 #include <SdlWrapper/Context.hpp>
 #include <SdlWrapper/FontCache/Font.hpp>
@@ -19,7 +20,7 @@ int main(int argc, char** argv)
     const SdlWrapper::Renderer renderer =
         window.CreateRenderer(-1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     const SdlWrapper::FontCache::Font font{};
-    font.Load(renderer, "Resources/Fonts/Hack-Regular.ttf", 20, {0xFF, 0xFF, 0xFF, 0xFF}, 0);
+    font.Load(renderer, CMAKE_PROJECT_SOURCE_DIR "/Resources/Fonts/Hack-Regular.ttf", 20, {0xFF, 0xFF, 0xFF, 0xFF}, 0);
 
     bool quit = false;
     while (!quit)
