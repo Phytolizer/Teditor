@@ -2,4 +2,8 @@
 BasedOnStyle: Microsoft
 PointerAlignment: Left
 TabWidth: 4
-UseTab: ForIndentation
+BinPackArguments: false
+BinPackParameters: false
+UseTab: Never
+IncludeBlocks: Regroup
+IndentCaseLabels: true

@@ -3,13 +3,16 @@ parse:
   _help_additional_commands:
   - Specify structure for custom cmake functions
   additional_commands:
-    foo:
+    declare_module:
       flags:
-      - BAR
-      - BAZ
+      - INTERNAL_INCLUDE
       kwargs:
-        HEADERS: '*'
+        KIND: 1
+        TARGET_NAME: 1
+        OUTPUT_NAME: 1
+        INCLUDES: '*'
         SOURCES: '*'
+        ABSOLUTE_SOURCES: '*'
         DEPENDS: '*'
   _help_override_spec:
   - Override configurations per-command where available
@@ -37,7 +40,7 @@ format:
   - In cases where the layout would require a fractional tab
   - character, the behavior of the  fractional indentation is
   - governed by <fractional_tab_policy>
-  use_tabchars: true
+  use_tabchars: false
   _help_fractional_tab_policy:
   - If <use_tabchars> is True, then the value of this variable
   - indicates how fractional indentions are handled during
@@ -54,7 +57,7 @@ format:
   _help_max_pargs_hwrap:
   - If a positional argument group contains more than this many
   - arguments, then force it to a vertical layout.
-  max_pargs_hwrap: 2
+  max_pargs_hwrap: 3
   _help_max_rows_cmdline:
   - If a cmdline positional group consumes more than this many
   - lines without nesting, then invalidate the layout (and nest)

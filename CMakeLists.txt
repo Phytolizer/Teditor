@@ -1,54 +1,39 @@
-cmake_minimum_required(VERSION 3.12...3.22)
+cmake_minimum_required(VERSION 3.8)
+
 project(
-	"Teditor"
-	LANGUAGES "CXX"
-	VERSION "0.1.0"
-	DESCRIPTION "Text Editor"
-	HOMEPAGE_URL "https://github.com/Phytolizer/Teditor"
+    Teditor
+    LANGUAGES CXX
+    VERSION 0.1.0
+    DESCRIPTION "A text editor."
+    HOMEPAGE_URL "https://github.com/Phytolizer/Teditor"
 )
 
-find_package("sdl2" CONFIG REQUIRED)
-find_package("sdl2-ttf" CONFIG REQUIRED)
+set(CMAKE_CXX_STANDARD 20)
 
-add_subdirectory("3rd/SDL_FontCache")
-add_subdirectory("3rd/librope")
+configure_file("Config.hpp.cin" "${PROJECT_BINARY_DIR}/Include/Config.hpp")
 
-add_library(
-	"SdlWrap"
-	"inc/SdlWrap/FcFont.hpp"
-	"inc/SdlWrap/GraphicsContext.hpp"
-	"inc/SdlWrap/Renderer.hpp"
-	"inc/SdlWrap/TtfContext.hpp"
-	"inc/SdlWrap/TtfFont.hpp"
-	"inc/SdlWrap/Window.hpp"
-	"src/SdlWrap/FcFont.cpp"
-	"src/SdlWrap/GraphicsContext.cpp"
-	"src/SdlWrap/Renderer.cpp"
-	"src/SdlWrap/TtfContext.cpp"
-	"src/SdlWrap/TtfFont.cpp"
-	"src/SdlWrap/Window.cpp"
-)
-target_include_directories("SdlWrap" PUBLIC "inc")
-target_link_libraries(
-	"SdlWrap"
-	PUBLIC "SDL2::SDL2"
-		   "SDL2::SDL2_ttf"
-		   "SDL_FontCache"
-)
+list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMake")
+include(DeclareModule)
 
-add_custom_target(
-	"copy_assets"
-	DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/res"
-	COMMAND "${CMAKE_COMMAND}" -E copy_directory
-			"${CMAKE_CURRENT_SOURCE_DIR}/res" "${CMAKE_CURRENT_BINARY_DIR}/res"
-)
+find_package(sdl2 CONFIG REQUIRED)
 
-add_executable(
-	"Teditor"
-	"src/Teditor/Main.cpp"
-	"src/Teditor/Teditor.cpp"
-	"src/Teditor/Teditor.hpp"
+add_subdirectory("ThirdParty/SDL_FontCache")
+
+declare_module(
+    "SdlWrapper"
+    KIND library
+    SOURCES "Context.cpp"
+            "Error.cpp"
+            "FontCache/Font.cpp"
+            "Renderer.cpp"
+            "VideoContext.cpp"
+            "Window.cpp"
+    DEPENDS SDL2::SDL2 FontCache
 )
-target_compile_features("Teditor" PRIVATE "cxx_std_20")
-target_link_libraries("Teditor" PRIVATE "SDL2::SDL2main" "SdlWrap" "librope")
-add_dependencies("Teditor" "copy_assets")
+declare_module(
+    "Teditor"
+    KIND executable
+    SOURCES "Main.cpp"
+    DEPENDS SDL2::SDL2 SDL2::SDL2main "SdlWrapper"
+    INCLUDES "${PROJECT_BINARY_DIR}/Include"
+)
