@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <SdlWrapper/Context.hpp>
+#include <SdlWrapper/FontCache/Font.hpp>
 #include <SdlWrapper/Renderer.hpp>
 #include <SdlWrapper/VideoContext.hpp>
 #include <SdlWrapper/Window.hpp>
@@ -17,6 +18,8 @@ int main(int argc, char** argv)
                            SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_SHOWN);
     const SdlWrapper::Renderer renderer =
         window.CreateRenderer(-1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    const SdlWrapper::FontCache::Font font{};
+    font.Load(renderer, "Resources/Fonts/Hack-Regular.ttf", 20, {0xFF, 0xFF, 0xFF, 0xFF}, 0);
 
     bool quit = false;
     while (!quit)
