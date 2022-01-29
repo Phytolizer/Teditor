@@ -37,8 +37,9 @@ int main(int argc, char** argv)
             }
         }
 
-        renderer.SetDrawColor({0xFF, 0x00, 0x00, 0xFF});
+        renderer.SetDrawColor({0x00, 0x00, 0x00, 0xFF});
         renderer.Clear();
+        font.Draw(renderer, 0, 0, "test set");
         renderer.Present();
     }
     return 0;
