@@ -37,8 +37,8 @@ int main(void) {
             }
         }
 
-        SDL_SetRenderDrawColor(ren, 0, 0, 0, 255);
-        SDL_RenderClear(ren);
+        scc(SDL_SetRenderDrawColor(ren, 0, 0, 0, 255));
+        scc(SDL_RenderClear(ren));
         SDL_RenderPresent(ren);
     }
 
