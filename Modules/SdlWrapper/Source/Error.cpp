@@ -26,7 +26,7 @@ SdlWrapper::Error SdlWrapper::Error::NullPointer(const std::string_view function
     return Error{function};
 }
 
-const char* SdlWrapper::Error::what() const
+const char* SdlWrapper::Error::what() const noexcept
 {
     return _message.c_str();
 }

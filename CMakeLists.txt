@@ -15,7 +15,7 @@ configure_file("Config.hpp.cin" "${PROJECT_BINARY_DIR}/Include/Config.hpp")
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMake")
 include(DeclareModule)
 
-find_package(sdl2 CONFIG REQUIRED)
+find_package(SDL2 CONFIG REQUIRED)
 
 add_subdirectory("ThirdParty/SDL_FontCache")
 
@@ -37,3 +37,6 @@ declare_module(
     DEPENDS SDL2::SDL2 SDL2::SDL2main "SdlWrapper"
     INCLUDES "${PROJECT_BINARY_DIR}/Include"
 )
+if(UNIX)
+    target_link_libraries("SdlWrapper" PUBLIC "X11" "Xext")
+endif()

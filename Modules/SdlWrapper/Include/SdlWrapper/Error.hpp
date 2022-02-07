@@ -18,7 +18,7 @@ struct Error final : std::runtime_error
     static Error FailureCode(std::string_view function, int code) noexcept;
     static Error NullPointer(std::string_view function) noexcept;
 
-    [[nodiscard]] const char* what() const override;
+    [[nodiscard]] const char* what() const noexcept override;
 };
 
 } // namespace SdlWrapper
