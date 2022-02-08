@@ -3,28 +3,61 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void scc(int code) {
+#include "font.h"
+
+void scc(int code, const char* call) {
+    const char* lparen = strchr(call, '(');
+    char* buffer = NULL;
+    const char* view = call;
+
+    if (lparen != NULL) {
+        buffer = calloc(1, lparen - call + 1);
+        memcpy(buffer, call, lparen - call);
+        buffer[lparen - call] = '\0';
+        view = buffer;
+    }
+
     if (code < 0) {
-        fprintf(stderr, "SDL error: %s\n", SDL_GetError());
+        fprintf(stderr, "%s: %s\n", view, SDL_GetError());
+        free(buffer);
         exit(1);
     }
+
+    free(buffer);
 }
 
-void* scp(void* ptr) {
+#define SCC(Call) scc((Call), #Call)
+
+void* scp(void* ptr, const char* call) {
+    const char* lparen = strchr(call, '(');
+    char* buffer = NULL;
+    const char* view = call;
+
+    if (lparen != NULL) {
+        buffer = calloc(1, lparen - call + 1);
+        memcpy(buffer, call, lparen - call);
+        buffer[lparen - call] = '\0';
+        view = buffer;
+    }
+
     if (ptr == NULL) {
-        fprintf(stderr, "SDL error: %s\n", SDL_GetError());
+        fprintf(stderr, "%s: %s\n", view, SDL_GetError());
+        free(buffer);
         exit(1);
     }
 
+    free(buffer);
     return ptr;
 }
 
+#define SCP(Call) scp((Call), #Call)
+
 int main(void) {
-    scc(SDL_Init(SDL_INIT_VIDEO));
-    SDL_Window* win = scp(SDL_CreateWindow(
+    SCC(SDL_Init(SDL_INIT_VIDEO));
+    SDL_Window* win = SCP(SDL_CreateWindow(
                 "Teditor", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600,
                 SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE));
-    SDL_Renderer* ren = scp(SDL_CreateRenderer(
+    SDL_Renderer* ren = SCP(SDL_CreateRenderer(
                 win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC));
 
     bool quit = false;
@@ -40,8 +73,8 @@ int main(void) {
             }
         }
 
-        scc(SDL_SetRenderDrawColor(ren, 0, 0, 0, 255));
-        scc(SDL_RenderClear(ren));
+        SCC(SDL_SetRenderDrawColor(ren, 0, 0, 0, 255));
+        SCC(SDL_RenderClear(ren));
         SDL_RenderPresent(ren);
     }
 

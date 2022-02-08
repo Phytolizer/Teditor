@@ -2,6 +2,8 @@ CC = clang
 CFLAGS = -Wall -Wextra -Wpedantic -std=c11 -ggdb `pkg-config --cflags sdl2`
 LIBS = `pkg-config --libs sdl2` -lm
 
+.PHONY: clean
+
 te: main.o
 	$(CC) $(CFLAGS) $(LIBS) -o $@ $^
 
@@ -10,4 +12,3 @@ te: main.o
 
 clean:
 	rm -vf te *.o
-
